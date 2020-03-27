@@ -2,12 +2,11 @@ const conection = require('../database/conection')
 
 module.exports = {
     async index(req,res){
-        const { page = 1} = req.query
+        const { page = 1} = req.query 
 
         const [count] = await conection('incidents')
         .count()
 
-        console.log(count)
         const incidents = await conection('incidents')
         .join('ongs','ongs.id', '=' , 'incidents.ong_id')
         .limit(5)
